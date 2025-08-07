@@ -1,0 +1,397 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.light-theme {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.dark-theme {
+    background-color: #1f2937;
+    color: #f3f4f6;
+}
+
+header {
+    background-color: #3b82f6;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#darkModeToggle {
+    background-color: #e5e7eb;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dark-theme #darkModeToggle {
+    background-color: #4b5563;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+main {
+    flex-grow: 1;
+    padding: 1rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .card {
+    background-color: #374151;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#progressChart, #moodChart, #moodWheel {
+    max-width: 100%;
+    height: 12rem;
+    margin: 0 auto;
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+#streakCount {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.dark-theme textarea, .dark-theme input[type="text"] {
+    background-color: #4b5563;
+    border-color: #6b7280;
+    color: #f3f4f6;
+}
+
+button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+
+button:focus, input:focus, textarea:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.dark-theme button:focus, .dark-theme input:focus, .dark-theme textarea:focus {
+    outline-color: #60a5fa;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 24rem;
+}
+
+.dark-theme .modal-content {
+    background-color: #374151;
+}
+
+.hidden {
+    display: none;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    text-align: center;
+}
+
+.calendar div, .calendar-header div {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.dark-theme .calendar div, .dark-theme .calendar-header div {
+    background-color: #4b5563;
+    color: #f3f4f6;
+}
+
+.calendar-day.angry { background-color: #ef4444; color: white; }
+.calendar-day.sad { background-color: #ca8a04; color: white; }
+.calendar-day.happy { background-color: #22c55e; color: white; }
+.calendar-day.calm { background-color: #3b82f6; color: white; }
+.calendar-day.excited { background-color: #a855f7; color: white; }
+
+@keyframes breathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+}
+
+.breathing-circle {
+    width: 6rem;
+    height: 6rem;
+    background-color: #3b82f6;
+    border-radius: 50%;
+    margin: 0.5rem auto;
+    animation: breathing 8s infinite;
+    will-change: transform;
+}
+
+.breathing-circle.paused {
+    animation-play-state: paused;
+}
+
+.exercise {
+    margin-bottom: 1rem;
+}
+
+.goal-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #d1d5db;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-theme .goal-item {
+    border-bottom-color: #6b7280;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.motivational, .mood-instruction {
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.dark-theme .motivational, .dark-theme .mood-instruction {
+    color: #d1d5db;
+}
+
+#moodWheel {
+    display: block;
+    margin: 0 auto;
+}
+
+.playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.playlist a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.playlist a:hover {
+    text-decoration: underline;
+}
+
+.achievements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    background-color: #22c55e;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.dark-theme .badge {
+    background-color: #16a34a;
+}
+
+#challengeStatus {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #16a34a;
+}
+
+.dark-theme #challengeStatus {
+    color: #22c55e;
+}
+
+@keyframes moodReaction {
+    0% { transform: scale(0); opacity: 1; }
+    50% { transform: scale(2); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.mood-reaction {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: moodReaction 1s ease-out forwards;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logout-btn {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+.dark-theme .logout-btn {
+    background-color: #b91c1c;
+}
+
+.dark-theme .logout-btn:hover {
+    background-color: #991b1b;
+}
+
+.history-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.dark-theme .history-item {
+    border-bottom-color: #6b7280;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.dark-theme .timestamp {
+    color: #9ca3af;
+}
+
+#moodInsights, #journalHistory, #gratitudeHistory, #goalList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.loading::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

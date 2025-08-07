@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSpace - Mental Wellness</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Welcome to MindSpace</h2>
+            <label for="usernameInput">Username:</label>
+            <input id="usernameInput" type="text" placeholder="Enter your username" required minlength="3">
+            <button id="loginBtn">Login</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>MindSpace</h1>
+        <div class="header-controls">
+            <span id="welcomeMessage" class="hidden"></span>
+            <button id="darkModeToggle" aria-label="Toggle dark mode">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Dark mode icon">
+                    <title>Dark mode icon</title>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Dashboard -->
+        <section id="dashboard" class="grid">
+            <div class="card">
+                <h2>Current Streak</h2>
+                <p id="streakCount">0 days</p>
+            </div>
+            <div class="card">
+                <h2>Weekly Mood</h2>
+                <canvas id="moodChart" aria-label="Weekly mood chart showing mood trends over time"></canvas>
+            </div>
+            <div class="card">
+                <h2>Calendar</h2>
+                <div id="calendar" class="calendar" role="region" aria-label="Mood tracking calendar">
+                    <p class="fallback">Calendar failed to load. Please try again later.</p>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Achievements</h2>
+                <div id="achievements" class="achievements">
+                    <p class="fallback">Achievements failed to load. Please try again later.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mood Logger -->
+        <section class="card">
+            <h2>Log Your Mood</h2>
+            <canvas id="moodWheel" width="200" height="200" aria-label="Mood wheel for selecting your current mood"></canvas>
+            <p class="mood-instruction">Click a section of the wheel to select your mood</p>
+            <label for="moodNote">Mood Note (optional):</label>
+            <textarea id="moodNote" placeholder="Add a note about your mood..."></textarea>
+            <button id="logMoodBtn">Log Mood</button>
+        </section>
+
+        <!-- Mood Insights -->
+        <section class="card">
+            <h2>Mood Insights</h2>
+            <div id="moodInsights">
+                <p class="fallback">Mood insights failed to load. Please try again later.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Daily Challenge</h2>
+            <p id="dailyChallengeText" class="loading">Loading challenge...</p>
+            <button id="completeChallengeBtn">Mark as Complete</button>
+            <p id="challengeStatus" class="hidden"></p>
+        </section>
+
+        <section class="card">
+            <h2>Mood Playlist</h2>
+            <div id="moodPlaylist" class="playlist">
+                <p class="fallback">Playlist failed to load. Please try again later.</p>
+            </div>
+        </section>
+
+        <!-- Journal -->
+        <section class="card">
+            <h2>Reflection Journal</h2>
+            <label for="journalEntry">Journal Entry:</label>
+            <textarea id="journalEntry" placeholder="Write your thoughts..."></textarea>
+            <button id="saveJournalBtn">Save Entry</button>
+            <div id="journalHistory">
+                <p class="fallback">Journal history failed to load. Please try again later.</p>
+            </div>
+        </section>
+
+        <!-- Gratitude -->
+        <section class="card">
+            <h2>Gratitude Writing</h2>
+            <label for="gratitudeEntry">Gratitude Entry:</label>
+            <textarea id="gratitudeEntry" placeholder="What are you grateful for today?"></textarea>
+            <button id="saveGratitudeBtn">Save Entry</button>
+            <div id="gratitudeHistory">
+                <p class="fallback">Gratitude history failed to load. Please try again later.</p>
+            </div>
+        </section>
+
+        <!-- Goal Setting -->
+        <section class="card">
+            <h2>Set Wellness Goals</h2>
+            <label for="goalInput">Goal:</label>
+            <input id="goalInput" type="text" placeholder="e.g., Meditate 5 times this week">
+            <button id="addGoalBtn">Add Goal</button>
+            <div id="goalList">
+                <p class="fallback">Goals failed to load. Please try again later.</p>
+            </div>
+        </section>
+
+        <!-- Progress Tracker -->
+        <section class="card">
+            <h2>Progress Tracker</h2>
+            <canvas id="progressChart" aria-label="Progress chart showing goal completion percentage"></canvas>
+            <p id="motivationalMessage" class="motivational"></p>
+        </section>
+
+        <!-- Calming Exercises -->
+        <section class="card">
+            <h2>Calming Exercises</h2>
+            <div class="exercise">
+                <h3>Breathing Exercise</h3>
+                <p>Follow the animation and breathe in for 4 seconds, hold for 4, and exhale for 4.</p>
+                <div id="breathingCircle" class="breathing-circle"></div>
+            </div>
+            <div class="exercise">
+                <h3>Guided Meditation</h3>
+                <p>Take 5 minutes to focus on your breath and clear your mind.</p>
+                <button id="startMeditation">Start</button>
+                <p id="meditationTimer" class="hidden">Time remaining: 5:00</p>
+            </div>
+        </section>
+
+        <!-- Data Export -->
+        <section class="card">
+            <h2>Export Data</h2>
+            <button id="exportDataBtn" title="Download your mood and journal data as a JSON file">Export as JSON</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
